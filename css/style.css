@@ -1,0 +1,600 @@
+/* 1. Thiết lập nền tảng */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-page: #090b18;
+  --bg-surface: #111329;
+  --bg-alt: #15172f;
+  --text-main: #f4f1ff;
+  --text-muted: #b7afd2;
+  --primary: #a78bfa;
+  --primary-strong: #c4b5fd;
+  --primary-soft: #292650;
+  --accent: #e879f9;
+  --accent-soft: #39233f;
+  --border-color: #35375f;
+  --error-color: #b42318;
+  --focus-color: #f0abfc;
+  --shadow-sm: 0 10px 28px rgba(0, 0, 0, 0.24);
+  --shadow-lg: 0 22px 50px rgba(0, 0, 0, 0.38);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 280px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(167, 139, 250, 0.14), transparent 22rem),
+    var(--bg-page);
+}
+
+::selection {
+  color: var(--text-main);
+  background: #4c4378;
+  color: var(--text-main);
+}
+
+img {
+  max-width: 100%;
+}
+
+code {
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.25rem;
+  color: var(--primary-strong);
+  background: var(--primary-soft);
+}
+
+/* 2. Khung chứa và các đoạn nội dung */
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.section {
+  padding-block: clamp(3rem, 7vw, 5.25rem);
+  scroll-margin-top: 5.5rem;
+}
+
+.section-alt {
+  border-block: 1px solid var(--border-color);
+  background:
+    linear-gradient(135deg, rgba(167, 139, 250, 0.08), transparent 45%),
+    var(--bg-alt);
+}
+
+.section-intro {
+  max-width: 46rem;
+  color: var(--text-muted);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-block-start: 0;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.55rem, 4vw, 2.15rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+
+/* 3. Header và điều hướng */
+.site-header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  background: rgba(9, 11, 24, 0.88);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  min-height: 4.5rem;
+  padding-block: 0.8rem;
+}
+
+.brand {
+  color: var(--text-main);
+  font-size: 1.125rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.brand::before {
+  content: "";
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.8rem;
+}
+
+.site-nav a {
+  padding: 0.35rem 0.2rem;
+  color: var(--text-main);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.site-nav a:hover {
+  color: var(--primary);
+  border-bottom-color: var(--accent);
+}
+
+/* 4. Giới thiệu cá nhân */
+.hero-section {
+  background:
+    linear-gradient(120deg, rgba(167, 139, 250, 0.12), rgba(9, 11, 24, 0) 55%),
+    var(--bg-page);
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.hero-content {
+  min-width: 0;
+  max-width: 43rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.75rem;
+  padding: 0.32rem 0.68rem;
+  border: 1px solid #4d4778;
+  border-radius: 999px;
+  color: var(--primary-strong);
+  background: var(--primary-soft);
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.avatar-box {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  min-width: 0;
+}
+
+.avatar-box::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -0.65rem;
+  bottom: 2.25rem;
+  width: 70%;
+  height: 70%;
+  border-radius: var(--radius-lg);
+  background: var(--primary-soft);
+}
+
+.avatar-box img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.avatar-box figcaption {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.hero-actions,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* 5. Nút bấm và trạng thái tương tác */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.button-primary {
+  color: #ffffff;
+  background: var(--primary);
+  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.22);
+}
+
+.button-primary:hover {
+  background: var(--primary-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(196, 181, 253, 0.28);
+}
+
+.button-primary:active,
+.button-secondary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.button-secondary {
+  color: var(--primary);
+  background: var(--bg-surface);
+  border-color: #66609a;
+}
+
+.button-secondary:hover {
+  background: var(--primary-soft);
+  transform: translateY(-2px);
+}
+
+/* 6. Kỹ năng và dự án */
+.skills-grid,
+.projects-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.skill-group,
+.project-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.skill-group {
+  border-top: 4px solid #8b7ed3;
+}
+
+.project-card {
+  border-top: 4px solid var(--accent);
+}
+
+.skill-group:hover,
+.project-card:hover,
+.project-card:focus-within {
+  border-color: #70699e;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-badge {
+  align-self: flex-start;
+  margin-bottom: 0.65rem;
+  padding: 0.24rem 0.62rem;
+  border: 1px solid #795084;
+  border-radius: 999px;
+  color: #f0c2f5;
+  background: var(--accent-soft);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.skill-group ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.skill-group li + li {
+  margin-top: 0.35rem;
+}
+
+.project-tech {
+  margin-top: 0.15rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.project-link {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.project-link:hover {
+  color: var(--primary-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a[href^="http"] {
+  color: var(--primary);
+  overflow-wrap: anywhere;
+}
+
+/* Thư viện ảnh trong dự án cá nhân */
+.life-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  margin-block: 0.75rem 1rem;
+}
+
+.life-item {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-page);
+}
+
+.life-item img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.life-item figcaption {
+  padding: 0.65rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.life-item figcaption strong {
+  color: var(--text-main);
+}
+
+/* 7. Biểu mẫu liên hệ */
+.contact-box {
+  max-width: 42rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-top: 4px solid #8b7ed3;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+label {
+  font-weight: 800;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.72rem 0.75rem;
+  border: 1px solid #686895;
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  background: #17192f;
+  font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+input:hover,
+textarea:hover {
+  border-color: #8d83bd;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+  background: #1c1d39;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.16);
+}
+
+.help-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+input:user-invalid,
+textarea:user-invalid {
+  border: 2px solid var(--error-color);
+  background: #2b1722;
+}
+
+/* 8. Trạng thái focus bàn phím */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+}
+
+/* 9. Footer và trang kết quả */
+.site-footer {
+  margin-top: 0;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  font-size: 0.925rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.footer-inner a {
+  color: var(--primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footer-inner a:hover {
+  text-decoration: underline;
+}
+
+.result-box {
+  max-width: 42rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--border-color);
+  border-top: 5px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.notice {
+  margin-block: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+/* 10. Breakpoint từ 640px */
+@media (min-width: 640px) {
+  .hero-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+
+  .avatar-box img {
+    width: 210px;
+    height: 210px;
+  }
+
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .life-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .life-item img {
+    height: 150px;
+  }
+}
+
+/* 11. Breakpoint từ 960px */
+@media (min-width: 960px) {
+  .container {
+    padding-inline: 1.5rem;
+  }
+
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Giảm chuyển động cho người dùng cấu hình trình duyệt tương ứng */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
